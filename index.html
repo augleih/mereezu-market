@@ -3,24 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>mereezu의 옷 팔아요</title>
+<title>mereezu's flea market</title>
 <meta name="description" content="mereezu의 옷장 정리 플리마켓. 상의·하의·원피스·셋업·아우터·악세사리.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="mereezu의 옷 팔아요.">
+<meta property="og:title" content="mereezu's flea market.">
 <meta property="og:description" content="옷장 정리 플리마켓 · 60벌">
 <meta property="og:image" content="https://mereezu-market.vercel.app/images/01/1.jpg">
-<meta name="theme-color" content="#F4F3EF">
+<meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <style>
-:root{--bg:#F4F3EF;--ink:#111;--mute:#6B6B6B;--line:#DAD8D2;--ph:#E7E5E0}
+:root{--bg:#000;--ink:#F4F3EF;--mute:#9A9A9A;--line:#2E2E2E;--ph:#1A1A1A;color-scheme:dark}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR','Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 .en{font-family:'Inter Tight','Noto Sans KR',sans-serif}
 .wrap{max-width:1120px;margin:0 auto}
-header .title{margin:0;padding:24px 12px 14px;font-size:min(21vw,120px);line-height:.98;font-weight:700;letter-spacing:-.07em;white-space:nowrap}
+header .title{margin:0;padding:24px 12px 14px;font-size:min(19vw,120px);line-height:.98;font-weight:700;letter-spacing:-.07em;white-space:nowrap}
 header .title .en{letter-spacing:-.075em}
 .status{padding:8px 16px 14px;display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:500;letter-spacing:.04em;font-variant-numeric:tabular-nums}
 .status .row{display:flex;justify-content:space-between}
@@ -46,13 +46,13 @@ article{display:flex;flex-direction:column;gap:14px;min-width:0}
 .track img{width:100%;height:100%;object-fit:cover;display:block}
 .cond{position:absolute;left:12px;top:12px;font-size:11px;font-weight:500;padding:4px 8px;background:var(--bg);pointer-events:none}
 .dots{position:absolute;left:12px;right:12px;bottom:12px;display:flex;gap:4px;pointer-events:none}
-.dots span{flex:1 1 0;height:2px;background:rgba(17,17,17,.2);transition:background .2s}
+.dots span{flex:1 1 0;height:2px;background:rgba(244,243,239,.3);transition:background .2s}
 .dots span.on{background:var(--ink)}
 .arr{position:absolute;top:0;bottom:0;width:56px;border:0;background:none;display:none;align-items:center;justify-content:center;cursor:pointer}
 .arr.prev{left:0}.arr.next{right:0}
 .arr[disabled]{opacity:.25;cursor:default}
 @media (min-width:768px) and (hover:hover){.arr{display:flex}}
-.sold-veil{position:absolute;inset:0;background:rgba(244,243,239,.62);display:flex;align-items:center;justify-content:center;pointer-events:none}
+.sold-veil{position:absolute;inset:0;background:rgba(0,0,0,.62);display:flex;align-items:center;justify-content:center;pointer-events:none}
 .sold-veil span{font-size:15px;font-weight:700;letter-spacing:.04em;color:var(--bg);background:var(--ink);padding:9px 18px}
 .head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .head .l{display:flex;align-items:baseline;gap:10px;min-width:0}
@@ -74,16 +74,16 @@ article{display:flex;flex-direction:column;gap:14px;min-width:0}
 .cta{position:sticky;bottom:0;z-index:6;background:var(--bg);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;justify-content:center}
 .cta a{width:100%;max-width:560px;min-height:54px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;background:var(--ink);color:var(--bg);text-decoration:none;font-size:15px;font-weight:500}
 .cta a.off{background:var(--line);color:var(--mute);pointer-events:none}
-.lb{position:fixed;inset:0;z-index:20;background:#111;display:none;flex-direction:column}
+.lb{position:fixed;inset:0;z-index:20;background:#000;display:none;flex-direction:column}
 .lb.open{display:flex}
-.lb .top{display:flex;justify-content:space-between;align-items:center;padding:8px 8px 8px 16px;color:var(--bg);font-size:13px}
+.lb .top{display:flex;justify-content:space-between;align-items:center;padding:8px 8px 8px 16px;color:#F4F3EF;font-size:13px}
 .lb .top .en{font-variant-numeric:tabular-nums}
 .lb .x{width:44px;height:44px;border:0;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .lb .ltrack{flex:1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
 .lb .ltrack::-webkit-scrollbar{display:none}
 .lb .ltrack div{flex:0 0 100%;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:0 0 16px}
 .lb .ltrack img{max-width:100%;max-height:100%;object-fit:contain}
-.lb .bottom{display:flex;align-items:center;justify-content:center;gap:20px;padding:0 16px calc(16px + env(safe-area-inset-bottom));color:var(--bg);font-size:14px}
+.lb .bottom{display:flex;align-items:center;justify-content:center;gap:20px;padding:0 16px calc(16px + env(safe-area-inset-bottom));color:#F4F3EF;font-size:14px}
 .lb .bottom button{width:44px;height:44px;border:0;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .lb .bottom button[disabled]{opacity:.25}
 .lb .bottom .nm{min-width:120px;text-align:center}
@@ -91,7 +91,7 @@ article{display:flex;flex-direction:column;gap:14px;min-width:0}
 </head>
 <body>
 <header class="wrap">
-<h1 class="title"><span class="en">mereezu</span>의<br>옷 팔아요.</h1>
+<h1 class="title en">mereezu's<br>flea market.</h1>
 <div class="status en">
 <div class="row"><span id="sold">SOLD 00</span><span class="left" id="left">LEFT 00</span></div>
 <div class="bar" role="img" id="bar" aria-label=""><span id="barfill" style="width:0%"></span></div>
@@ -169,7 +169,7 @@ function renderTabs(){
   var pool=items.filter(function(i){return !(state.hideSold&&i.sold)});
   var defs=[['all','전체']].concat(CATS.filter(function(c){return items.some(function(i){return i.cat===c})}).map(function(c){return [c,c]}));
   var h=defs.map(function(d){var c=d[0]==='all'?pool.length:pool.filter(function(i){return i.cat===d[0]}).length;return '<button type="button" class="tab" data-cat="'+d[0]+'" aria-pressed="'+(state.cat===d[0])+'">'+d[1]+'<sup>'+c+'</sup></button>'}).join('');
-  h+='<button type="button" class="hide-sold" id="hs" aria-pressed="'+state.hideSold+'"><span class="box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#F4F3EF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>판매완료 제외</button>';
+  h+='<button type="button" class="hide-sold" id="hs" aria-pressed="'+state.hideSold+'"><span class="box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>판매완료 제외</button>';
   document.getElementById('tabs').innerHTML=h;
 }
 function renderGrid(){
