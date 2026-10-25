@@ -187,14 +187,22 @@ function bindTrack(tr){
   var art=tr.closest('article');var dots=art.querySelectorAll('.dots span');
   var prev=art.querySelector('.arr.prev'),next=art.querySelector('.arr.next'),cnt=art.querySelector('.cnt');
   var n=tr.children.length;
-  function cur(){return Math.round(tr.scrollLeft/tr.clientWidth)}
-  function upd(){var i=cur();dots.forEach(function(d,k){d.classList.toggle('on',k===i)});if(cnt)cnt.textContent=(i+1)+'/'+n}
-  var t;tr.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(upd,60)},{passive:true});
-  function go(i){tr.scrollTo({left:((i%n)+n)%n*tr.clientWidth,behavior:'smooth'})}
-  if(prev){prev.onclick=function(){go(cur()-1)};next.onclick=function(){go(cur()+1)}}
-  if(n>1){var sx=null,si=0;
-    tr.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;si=cur()},{passive:true});
-    tr.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;sx=null;if(si===n-1&&dx<-40)go(0);else if(si===0&&dx>40)go(n-1)},{passive:true});}
+  if(n<2)return;
+  // infinite loop: clone last slide before the first and first slide after the last
+  var head=tr.lastElementChild.cloneNode(true),tail=tr.firstElementChild.cloneNode(true);
+  head.setAttribute('aria-hidden','true');tail.setAttribute('aria-hidden','true');head.tabIndex=-1;tail.tabIndex=-1;
+  tr.insertBefore(head,tr.firstElementChild);tr.appendChild(tail);
+  function w(){return tr.clientWidth}
+  function pos(){return Math.round(tr.scrollLeft/w())}
+  function real(){return ((pos()-1)%n+n)%n}
+  function jump(i){tr.style.scrollSnapType='none';tr.scrollLeft=i*w();tr.offsetWidth;tr.style.scrollSnapType=''}
+  jump(1);
+  function upd(){var i=real();dots.forEach(function(d,k){d.classList.toggle('on',k===i)});if(cnt)cnt.textContent=(i+1)+'/'+n}
+  function settle(){var p=pos();if(p===0)jump(n);else if(p===n+1)jump(1);upd()}
+  var t;tr.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(settle,120)},{passive:true});
+  function go(d){tr.scrollTo({left:(pos()+d)*w(),behavior:'smooth'})}
+  if(prev){prev.onclick=function(){go(-1)};next.onclick=function(){go(1)}}
+  window.addEventListener('resize',function(){if(tr.isConnected)jump(real()+1)});
 }
 
 document.getElementById('tabs').addEventListener('click',function(e){
