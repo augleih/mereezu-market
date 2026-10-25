@@ -29,7 +29,7 @@ header .title .en{letter-spacing:-.075em}
 .bar span{height:100%;background:var(--ink);transition:width .4s}
 nav.chips{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:0 16px;display:flex;gap:20px;overflow-x:auto;scrollbar-width:none}
 nav.chips::-webkit-scrollbar{display:none}
-.tab{flex:0 0 auto;font:inherit;font-size:14px;min-height:48px;padding:0;border:0;border-bottom:2px solid transparent;background:none;cursor:pointer;color:var(--mute)}
+.tab{flex:0 0 auto;font:inherit;font-family:'Inter Tight','Noto Sans KR',sans-serif;font-size:14px;min-height:48px;padding:0;border:0;border-bottom:2px solid transparent;background:none;cursor:pointer;color:var(--mute)}
 .tab[aria-pressed=true]{color:var(--ink);font-weight:700;border-bottom-color:var(--ink)}
 .tab sup{font-family:'Inter Tight',sans-serif;font-size:10px;font-weight:500;margin-left:2px;color:var(--mute)}
 .hide-sold{flex:0 0 auto;margin-left:auto;display:flex;align-items:center;gap:6px;font:inherit;font-size:13px;min-height:48px;padding:0 0 0 8px;border:0;background:none;color:var(--ink);cursor:pointer;white-space:nowrap}
@@ -117,6 +117,7 @@ var D=JSON.parse(document.getElementById('data').textContent);
 var CHAT=D.chat||'';
 var items=D.items;
 var CATS=['상의','아우터','셋업','원피스','하의','악세사리'];
+var CAT_EN={'all':'All','상의':'Tops','아우터':'Outerwear','셋업':'Sets','원피스':'Dresses','하의':'Bottoms','악세사리':'Accessories'};
 var LABELS={'상의':['가슴','총장'],'아우터':['가슴','총장'],'셋업':['가슴','총장'],'원피스':['허리','총장'],'하의':['허리','총장'],'악세사리':['가로','세로']};
 var state={cat:'all',hideSold:false};
 function pad(n){return n<10?'0'+n:''+n}
@@ -167,7 +168,7 @@ function visible(){return items.filter(function(i){return (state.cat==='all'||i.
 
 function renderTabs(){
   var pool=items.filter(function(i){return !(state.hideSold&&i.sold)});
-  var defs=[['all','전체']].concat(CATS.filter(function(c){return items.some(function(i){return i.cat===c})}).map(function(c){return [c,c]}));
+  var defs=[['all',CAT_EN.all]].concat(CATS.filter(function(c){return items.some(function(i){return i.cat===c})}).map(function(c){return [c,CAT_EN[c]||c]}));
   var h=defs.map(function(d){var c=d[0]==='all'?pool.length:pool.filter(function(i){return i.cat===d[0]}).length;return '<button type="button" class="tab" data-cat="'+d[0]+'" aria-pressed="'+(state.cat===d[0])+'">'+d[1]+'<sup>'+c+'</sup></button>'}).join('');
   h+='<button type="button" class="hide-sold" id="hs" aria-pressed="'+state.hideSold+'"><span class="box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>판매완료 제외</button>';
   document.getElementById('tabs').innerHTML=h;
