@@ -37,7 +37,7 @@ nav.chips::-webkit-scrollbar{display:none}
 .hide-sold[aria-pressed=true] .box{background:var(--ink)}
 main{padding:24px 16px 40px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:56px 24px}
-article{display:flex;flex-direction:column;gap:14px;min-width:0;content-visibility:auto;contain-intrinsic-size:auto 720px}
+article{display:flex;flex-direction:column;gap:14px;min-width:0;}
 .media{position:relative;aspect-ratio:4/5;background:var(--ph);overflow:hidden}
 @media (max-width:767px){.media{margin:0 -16px}}
 .track{display:flex;width:100%;height:100%;overflow-x:auto;overscroll-behavior-x:contain;touch-action:pan-x pan-y;scroll-snap-type:x mandatory;scrollbar-width:none}
@@ -158,7 +158,7 @@ function specHtml(it){
 function card(it,idx){
   var n=it.photos.length;
   var imgs=it.photos.map(function(p,k){
-    return '<button type="button" data-open="'+idx+'" data-k="'+k+'" aria-label="'+esc(it.name)+' 사진 '+(k+1)+' 크게 보기">'+(k===0?'<img src="'+p.s+'" alt="" loading="'+(idx<4?'eager':'lazy')+'" decoding="async">':'<img data-src="'+p.s+'" alt="" decoding="async">')+'</button>';
+    return '<button type="button" data-open="'+idx+'" data-k="'+k+'" aria-label="'+esc(it.name)+' 사진 '+(k+1)+' 크게 보기"><img data-src="'+p.s+'" alt="" decoding="async"></button>';
   }).join('');
   var dots=n>1?'<div class="dots">'+it.photos.map(function(_,k){return '<span'+(k===0?' class="on"':'')+'></span>'}).join('')+'</div>':'';
   var arrows=n>1?'<button type="button" class="arr prev" aria-label="이전 사진"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><button type="button" class="arr next" aria-label="다음 사진"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>':'';
@@ -191,7 +191,7 @@ var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es
   var t=e.target.querySelector('.track');if(e.isIntersecting&&t&&t._fix)t._fix();
   e.target.querySelectorAll('img[data-src]').forEach(function(im){
     if(e.isIntersecting){if(!im.getAttribute('src'))im.src=im.dataset.src}else if(im.getAttribute('src')){im.removeAttribute('src')}
-  })})},{rootMargin:'900px 0px'}):null;
+  })})},{rootMargin:'700px 0px'}):null;
 function render(){renderTabs();renderGrid()}
 
 function bindTrack(tr){
