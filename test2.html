@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TEST2 mereezu's flea market</title>
+<meta name="description" content="mereezu의 옷장 정리 플리마켓. 상의·하의·원피스·셋업·아우터·악세사리.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="mereezu's flea market.">
+<meta property="og:description" content="옷장 정리 플리마켓 · 60벌">
+<meta property="og:image" content="https://mereezu-market.vercel.app/images/01/1.jpg?v=50ed677d">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#000;--ink:#F4F3EF;--mute:#9A9A9A;--line:#2E2E2E;--ph:#1A1A1A;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR','Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.en{font-family:'Inter Tight',-apple-system,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif}
+.wrap{max-width:1120px;margin:0 auto}
+header .title{margin:0;padding:24px 12px 14px;font-size:min(19vw,120px);line-height:.98;font-weight:700;letter-spacing:-.07em;white-space:nowrap}
+header .title .en{letter-spacing:-.075em}
+.status{padding:8px 16px 14px;display:flex;flex-direction:column;gap:8px;font-size:12px;font-weight:500;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.status .row{display:flex;justify-content:space-between}
+.status .left{color:var(--mute)}
+.bar{height:6px;background:var(--line);display:flex}
+.bar span{height:100%;background:var(--ink);transition:width .4s}
+nav.chips{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:0 16px;display:flex;gap:20px;overflow-x:auto;scrollbar-width:none}
+nav.chips::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;font:inherit;font-family:'Inter Tight',-apple-system,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;font-size:14px;min-height:48px;padding:0;border:0;border-bottom:2px solid transparent;background:none;cursor:pointer;color:var(--mute)}
+.tab[aria-pressed=true]{color:var(--ink);font-weight:700;border-bottom-color:var(--ink)}
+.tab sup{font-family:'Inter Tight',sans-serif;font-size:10px;font-weight:500;margin-left:2px;color:var(--mute)}
+.hide-sold{flex:0 0 auto;margin-left:auto;display:flex;align-items:center;gap:6px;font:inherit;font-size:13px;min-height:48px;padding:0 0 0 8px;border:0;background:none;color:var(--ink);cursor:pointer;white-space:nowrap}
+.hide-sold .box{width:16px;height:16px;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center}
+.hide-sold[aria-pressed=true] .box{background:var(--ink)}
+main{padding:24px 16px 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:56px 24px}
+article{display:flex;flex-direction:column;gap:14px;min-width:0;}
+.media{position:relative;aspect-ratio:4/5;background:var(--ph);overflow:hidden}
+@media (max-width:767px){.media{margin:0 -16px}}
+.track{display:flex;width:100%;height:100%;overflow-x:auto;overscroll-behavior-x:contain;touch-action:pan-x pan-y;scroll-snap-type:x mandatory;scrollbar-width:none}
+.track::-webkit-scrollbar{display:none}
+.track button{flex:0 0 100%;height:100%;scroll-snap-align:start;padding:0;border:0;background:none;cursor:zoom-in}
+.track img{width:100%;height:100%;object-fit:cover;display:block}
+.cond{position:absolute;left:12px;top:12px;font-size:11px;font-weight:500;padding:4px 8px;background:var(--bg);pointer-events:none}
+.dots{position:absolute;left:12px;right:12px;bottom:12px;display:flex;gap:4px;pointer-events:none}
+.dots span{flex:1 1 0;height:2px;background:rgba(244,243,239,.3);transition:background .2s}
+.dots span.on{background:var(--ink)}
+.arr{position:absolute;top:50%;width:40px;height:40px;margin-top:-20px;border-radius:50%;border:0;background:rgba(244,243,239,.92);display:none;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .2s;z-index:2}
+.arr.prev{left:10px}.arr.next{right:10px}
+.arr[disabled]{visibility:hidden}
+@media (hover:hover) and (pointer:fine){.arr{display:flex}.media:hover .arr{opacity:1}}
+.arr:focus-visible{opacity:1;outline:2px solid var(--ink);outline-offset:2px}
+.cnt{position:absolute;right:12px;top:12px;font-family:'Inter Tight',sans-serif;font-size:11px;font-weight:500;padding:4px 8px;background:rgba(0,0,0,.6);color:var(--ink);pointer-events:none;font-variant-numeric:tabular-nums}
+.sold-veil{position:absolute;inset:0;background:rgba(0,0,0,.62);display:flex;align-items:center;justify-content:center;pointer-events:none}
+.sold-veil span{font-size:15px;font-weight:700;letter-spacing:.04em;color:var(--bg);background:var(--ink);padding:9px 18px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.head .l{display:flex;align-items:baseline;gap:10px;min-width:0}
+.no{font-family:'Inter Tight',sans-serif;font-size:12px;font-weight:500;color:var(--mute);font-variant-numeric:tabular-nums}
+.name{font-size:16px;font-weight:500;letter-spacing:-.01em;word-break:keep-all}
+.price{font-family:'Inter Tight',-apple-system,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;font-size:17px;font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.price.ask{font-family:-apple-system,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;font-size:14px;font-weight:500;color:var(--mute)}
+.is-sold .name,.is-sold .price{color:var(--mute)}
+.is-sold .price{text-decoration:line-through}
+.spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.spec div{background:var(--bg);padding:8px 0 8px 10px;display:flex;flex-direction:column;gap:3px}
+.spec div:first-child{padding-left:0}
+.spec .k{font-size:11px;color:var(--mute)}
+.spec .v{font-family:'Inter Tight',sans-serif;font-size:14px;font-weight:500;font-variant-numeric:tabular-nums}
+.spec .k em{font-style:normal;color:var(--ink);margin-right:4px}
+.more{font-size:13px;color:var(--ink);text-decoration:underline;text-underline-offset:3px;align-self:flex-start}
+.empty{padding:80px 0;text-align:center;color:var(--mute);font-size:14px}
+.foot{margin:56px 0 0;font-size:12px;color:var(--mute);text-align:center;line-height:1.7}
+.cta{position:sticky;bottom:0;z-index:6;background:var(--bg);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;justify-content:center}
+.cta a{width:100%;max-width:560px;min-height:54px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;background:var(--ink);color:var(--bg);text-decoration:none;font-size:15px;font-weight:500}
+.cta a.off{background:var(--line);color:var(--mute);pointer-events:none}
+.lb{position:fixed;inset:0;z-index:20;background:#000;display:none;flex-direction:column}
+.lb.open{display:flex}
+.lb .top{display:flex;justify-content:space-between;align-items:center;padding:8px 8px 8px 16px;color:#F4F3EF;font-size:13px}
+.lb .top .en{font-variant-numeric:tabular-nums}
+.lb .x{width:44px;height:44px;border:0;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.lb .ltrack{flex:1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.lb .ltrack::-webkit-scrollbar{display:none}
+.lb .ltrack div{flex:0 0 100%;scroll-snap-align:start;display:flex;align-items:center;justify-content:center;padding:0 0 16px}
+.lb .ltrack img{max-width:100%;max-height:100%;object-fit:contain}
+.lb .bottom{display:flex;align-items:center;justify-content:center;gap:20px;padding:0 16px calc(16px + env(safe-area-inset-bottom));color:#F4F3EF;font-size:14px}
+.lb .bottom button{width:44px;height:44px;border:0;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.lb .bottom button[disabled]{opacity:.25}
+.lb .bottom .nm{min-width:120px;text-align:center}
+</style>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<header class="wrap">
+<h1 class="title en">mereezu's<br>flea market.</h1>
+<div class="status en">
+<div class="row"><span id="sold">SOLD 00</span><span class="left" id="left">LEFT 00</span></div>
+<div class="bar" role="img" id="bar" aria-label=""><span id="barfill" style="width:0%"></span></div>
+</div>
+</header>
+<nav class="chips wrap" aria-label="카테고리" id="tabs"></nav>
+<main class="wrap">
+<div class="grid" id="grid"></div>
+<p class="foot">직거래 · 택배 가능<br>사이즈는 단면 실측(cm) · 중고 상품이라 교환·환불은 어려워요</p>
+</main>
+<div class="cta"><a id="cta" href="#" target="_blank" rel="noopener"><span>오픈채팅으로 구매 문의</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+<div class="top"><span class="en" id="lbCount"></span><button type="button" class="x" id="lbClose" aria-label="닫기"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4F3EF" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+<div class="ltrack" id="lbTrack"></div>
+<div class="bottom"><button type="button" id="lbPrev" aria-label="이전 사진"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4F3EF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><span class="nm" id="lbName"></span><button type="button" id="lbNext" aria-label="다음 사진"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4F3EF" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button></div>
+</div>
+
+<script id="data" type="application/json">{"chat": "https://open.kakao.com/o/srILWoUi", "items": [{"no": "01", "name": "[준지] 오프숄더 블라우스", "cat": "상의", "size": "S", "m1": "35", "m2": "29", "sw": "", "sl": "", "price": 50000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/01/1.jpg?v=50ed677d", "s": "images/01/1_s.jpg?v=db3def12"}]}, {"no": "02", "name": "[타브] 핑크 체크 셋업", "cat": "셋업", "size": "2", "m1": "42.5", "m2": "47.5", "sw": "38", "sl": "70", "price": 100000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/02/1.jpg?v=e423aee3", "s": "images/02/1_s.jpg?v=2d74cccf"}]}, {"no": "03", "name": "[가니] 크롭 자켓", "cat": "아우터", "size": "34", "m1": "40", "m2": "40.5", "sw": "", "sl": "", "price": 150000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/03/1.jpg?v=b2366ac4", "s": "images/03/1_s.jpg?v=286b2450"}]}, {"no": "04", "name": "[지오다노] 레더 자켓", "cat": "아우터", "size": "S", "m1": "40", "m2": "50", "sw": "", "sl": "", "price": 30000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/04/1.jpg?v=9ae4ba07", "s": "images/04/1_s.jpg?v=36541d26"}]}, {"no": "05", "name": "[마리떼프랑소] 화이트 진", "cat": "하의", "size": "25", "m1": "31.5", "m2": "96", "sw": "", "sl": "", "price": 30000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/05/1.jpg?v=d807b1f6", "s": "images/05/1_s.jpg?v=0eccf2bc"}]}, {"no": "06", "name": "[오버듀플레어] 오버핏 반바지", "cat": "하의", "size": "M", "m1": "35", "m2": "48.5", "sw": "", "sl": "", "price": 30000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/06/1.jpg?v=9bbe58de", "s": "images/06/1_s.jpg?v=9515bbda"}]}, {"no": "07", "name": "[혜인서] 블랙 스커트", "cat": "하의", "size": "XS", "m1": "33", "m2": "71", "sw": "", "sl": "", "price": 70000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/07/1.jpg?v=95e25e85", "s": "images/07/1_s.jpg?v=e3a0098f"}]}, {"no": "08", "name": "[타브] 파스텔 그린 원피스", "cat": "원피스", "size": "2", "m1": "35.5", "m2": "100", "sw": "", "sl": "", "price": 50000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/08/1.jpg?v=5e01bded", "s": "images/08/1_s.jpg?v=3fce6519"}]}, {"no": "09", "name": "[솔리드] 파스텔 블루 맨투맨", "cat": "상의", "size": "52", "m1": "64", "m2": "71", "sw": "", "sl": "", "price": 50000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/09/1.jpg?v=852f9518", "s": "images/09/1_s.jpg?v=77b35ff4"}]}, {"no": "10", "name": "[딘트] 원피스", "cat": "원피스", "size": "66", "m1": "32", "m2": "111", "sw": "", "sl": "", "price": 30000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/10/1.jpg?v=79591782", "s": "images/10/1_s.jpg?v=253822be"}]}, {"no": "11", "name": "[나우나우] 티셔츠", "cat": "상의", "size": "S", "m1": "41", "m2": "50", "sw": "", "sl": "", "price": 20000, "cond": "상태 하", "sold": false, "link": "", "photos": [{"l": "images/11/1.jpg?v=6246b378", "s": "images/11/1_s.jpg?v=d725c3d7"}]}, {"no": "12", "name": "[시몬밀러] 오버핏 자켓", "cat": "상의", "size": "0", "m1": "40", "m2": "48.5", "sw": "", "sl": "", "price": 150000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/12/1.jpg?v=d7d42a98", "s": "images/12/1_s.jpg?v=6150b310"}]}, {"no": "13", "name": "[자라] 스커트", "cat": "하의", "size": "S", "m1": "31.5", "m2": "62", "sw": "", "sl": "", "price": 3000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/13/1.jpg?v=e2ca805c", "s": "images/13/1_s.jpg?v=d7a2e511"}]}, {"no": "14", "name": "[보세] 슬랙스", "cat": "하의", "size": "S", "m1": "32", "m2": "99.5", "sw": "", "sl": "", "price": 10000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/14/1.jpg?v=c46f6840", "s": "images/14/1_s.jpg?v=970886c5"}]}, {"no": "15", "name": "[써머락커] 원피스", "cat": "원피스", "size": "S", "m1": "31.5", "m2": "59", "sw": "", "sl": "", "price": 20000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/15/1.jpg?v=8a5e671b", "s": "images/15/1_s.jpg?v=fff3f148"}]}, {"no": "16", "name": "[보세] 스웨이드 크롭 자켓", "cat": "상의", "size": "S", "m1": "51", "m2": "40", "sw": "", "sl": "", "price": 10000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/16/1.jpg?v=b4f8601b", "s": "images/16/1_s.jpg?v=0ace5ffe"}]}, {"no": "17", "name": "[자라] 블랙 니트", "cat": "상의", "size": "S", "m1": "36", "m2": "56.5", "sw": "", "sl": "", "price": 3000, "cond": "상태 하", "sold": false, "link": "", "photos": [{"l": "images/17/1.jpg?v=1f8cc42d", "s": "images/17/1_s.jpg?v=795843af"}]}, {"no": "18", "name": "[보세] 스커트", "cat": "하의", "size": "S", "m1": "35", "m2": "85", "sw": "", "sl": "", "price": 10000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/18/1.jpg?v=ad42eff6", "s": "images/18/1_s.jpg?v=363490c1"}]}, {"no": "19", "name": "[메종마레] 나시", "cat": "상의", "size": "S", "m1": "30", "m2": "36", "sw": "", "sl": "", "price": 10000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/19/1.jpg?v=93421ed8", "s": "images/19/1_s.jpg?v=c34b14c1"}]}, {"no": "20", "name": "[페인오어플레져] 탑 & 스커트 셋업", "cat": "셋업", "size": "S", "m1": "27", "m2": "21", "sw": "29", "sl": "90.5", "price": 50000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/20/1.jpg?v=e1078874", "s": "images/20/1_s.jpg?v=23ed46f3"}]}, {"no": "21", "name": "[타입서비스] 긴팔", "cat": "상의", "size": "S", "m1": "38", "m2": "50", "sw": "", "sl": "", "price": 5000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/21/1.jpg?v=606cd195", "s": "images/21/1_s.jpg?v=27e59a1f"}]}, {"no": "22", "name": "[나일로라] 긴팔", "cat": "상의", "size": "S", "m1": "30", "m2": "40", "sw": "", "sl": "", "price": 10000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/22/1.jpg?v=e8933a3d", "s": "images/22/1_s.jpg?v=bfbd0e9f"}]}, {"no": "23", "name": "[자라] 휴양지 원피스", "cat": "원피스", "size": "S", "m1": "32", "m2": "75", "sw": "", "sl": "", "price": 5000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/23/1.jpg?v=edb411c6", "s": "images/23/1_s.jpg?v=654aea52"}]}, {"no": "24", "name": "[EQL] 블루 스커트", "cat": "하의", "size": "S", "m1": "30", "m2": "53", "sw": "", "sl": "", "price": 20000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/24/1.jpg?v=93d99b0f", "s": "images/24/1_s.jpg?v=717ea488"}]}, {"no": "25", "name": "[가니] 크롭 탑", "cat": "상의", "size": "34", "m1": "31", "m2": "22", "sw": "", "sl": "", "price": 50000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/25/1.jpg?v=eda56aaf", "s": "images/25/1_s.jpg?v=bbe6f4be"}]}, {"no": "26", "name": "[써머락커] 셋업", "cat": "셋업", "size": "S", "m1": "41", "m2": "32", "sw": "33.5", "sl": "32", "price": 20000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/26/1.jpg?v=98aac4c9", "s": "images/26/1_s.jpg?v=547a5ff8"}]}, {"no": "27", "name": "[유희] 장원영 원피스", "cat": "원피스", "size": "S", "m1": "71.5", "m2": "30", "sw": "", "sl": "", "price": 30000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/27/1.jpg?v=116f4607", "s": "images/27/1_s.jpg?v=d57b0491"}]}, {"no": "28", "name": "[보세] 스커트", "cat": "하의", "size": "S", "m1": "35", "m2": "77.5", "sw": "", "sl": "", "price": 7000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/28/1.jpg?v=7dd517f2", "s": "images/28/1_s.jpg?v=ce9113c8"}]}, {"no": "29", "name": "[보세] 플라워 블라우스", "cat": "상의", "size": "S", "m1": "49", "m2": "64", "sw": "", "sl": "", "price": 10000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/29/1.jpg?v=84a56d0a", "s": "images/29/1_s.jpg?v=0c9eb85f"}]}, {"no": "30", "name": "[인스턴트펑크] 체크 부츠컷 팬츠", "cat": "하의", "size": "S", "m1": "35.5", "m2": "102", "sw": "", "sl": "", "price": 30000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/30/1.jpg?v=86b11bc3", "s": "images/30/1_s.jpg?v=bdb36980"}]}, {"no": "31", "name": "[누아누 팬츠] 단추없음 부츠컷 팬츠", "cat": "하의", "size": "S", "m1": "36", "m2": "99.5", "sw": "", "sl": "", "price": 30000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/31/1.jpg?v=b4457e85", "s": "images/31/1_s.jpg?v=48eedfbb"}]}, {"no": "32", "name": "[티엘씨] 퍼 스커트", "cat": "하의", "size": "S", "m1": "34", "m2": "40", "sw": "", "sl": "", "price": 20000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/32/1.jpg?v=fea5b5c9", "s": "images/32/1_s.jpg?v=24596159"}]}, {"no": "33", "name": "[큐리티] 볼레로 가디건, 스커트 셋업", "cat": "셋업", "size": "S", "m1": "42", "m2": "38", "sw": "38", "sl": "71", "price": 20000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/33/1.jpg?v=e54c99b2", "s": "images/33/1_s.jpg?v=8a4ec41d"}]}, {"no": "34", "name": "[타브] 그린 체크 셋업 (울100)", "cat": "셋업", "size": "M", "m1": "40", "m2": "45", "sw": "32", "sl": "41", "price": 200000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/34/1.jpg?v=d6199b29", "s": "images/34/1_s.jpg?v=b6fab706"}]}, {"no": "35", "name": "[보세] 네이비 체크 부츠컷", "cat": "하의", "size": "M", "m1": "35", "m2": "103.5", "sw": "", "sl": "", "price": 10000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/35/1.jpg?v=b0560011", "s": "images/35/1_s.jpg?v=71cf7e8e"}]}, {"no": "36", "name": "[자라] 네이비 자켓", "cat": "상의", "size": "S", "m1": "40", "m2": "42", "sw": "", "sl": "", "price": 20000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/36/1.jpg?v=7216f0ba", "s": "images/36/1_s.jpg?v=964068c2"}]}, {"no": "37", "name": "[솔리드] 파스텔 옐로우 맨투맨", "cat": "상의", "size": "48", "m1": "56", "m2": "70", "sw": "", "sl": "", "price": 50000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/37/1.jpg?v=7be97344", "s": "images/37/1_s.jpg?v=64b61788"}]}, {"no": "38", "name": "[타브] 옐로우 베스트", "cat": "상의", "size": "F", "m1": "48", "m2": "54", "sw": "", "sl": "", "price": 20000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/38/1.jpg?v=5327be07", "s": "images/38/1_s.jpg?v=1c664ea1"}]}, {"no": "39", "name": "[인지엑티브] 니트 원피스", "cat": "상의", "size": "S", "m1": "39", "m2": "78.5", "sw": "", "sl": "", "price": 10000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/39/1.jpg?v=e2d45760", "s": "images/39/1_s.jpg?v=678236fa"}]}, {"no": "40", "name": "[보세] 슬랙스", "cat": "하의", "size": "S", "m1": "30", "m2": "100.5", "sw": "", "sl": "", "price": 2000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/40/1.jpg?v=400f4559", "s": "images/40/1_s.jpg?v=52f111ba"}]}, {"no": "41", "name": "[프린세스 폴리]", "cat": "상의", "size": "S", "m1": "28.5", "m2": "26", "sw": "", "sl": "", "price": 3000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/41/1.jpg?v=2459d356", "s": "images/41/1_s.jpg?v=b25abb7e"}]}, {"no": "42", "name": "[인스턴트펑크] 베이지 슬렉스", "cat": "하의", "size": "1", "m1": "35.5", "m2": "101", "sw": "", "sl": "", "price": 30000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/42/1.jpg?v=990a2dc0", "s": "images/42/1_s.jpg?v=d57c3bd6"}]}, {"no": "43", "name": "[앤더슨벨] 퍼 나시 탑", "cat": "상의", "size": "S", "m1": "31", "m2": "40", "sw": "", "sl": "", "price": 50000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/43/1.jpg?v=992a9955", "s": "images/43/1_s.jpg?v=073eb3ad"}]}, {"no": "44", "name": "[나무그림] 그린 트위드 자켓", "cat": "상의", "size": "S", "m1": "49.5", "m2": "51.5", "sw": "", "sl": "", "price": 30000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/44/1.jpg?v=a49a3aa6", "s": "images/44/1_s.jpg?v=548bdeb2"}]}, {"no": "45", "name": "[비비안 웨스트우드] 맨투맨 크롭 커팅", "cat": "상의", "size": "S", "m1": "49.5", "m2": "32.5", "sw": "", "sl": "", "price": 15000, "cond": "상태 하", "sold": false, "link": "", "photos": [{"l": "images/45/1.jpg?v=3bf2322e", "s": "images/45/1_s.jpg?v=490599f6"}]}, {"no": "46", "name": "[하우스오브써니] 오프숄더 가디건", "cat": "상의", "size": "34", "m1": "32", "m2": "33", "sw": "", "sl": "", "price": 25000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/46/1.jpg?v=7cba6fff", "s": "images/46/1_s.jpg?v=6d7287f6"}]}, {"no": "47", "name": "[데비어퍼] 블루 가디건", "cat": "상의", "size": "S", "m1": "34", "m2": "31", "sw": "", "sl": "", "price": 25000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/47/1.jpg?v=35ad772a", "s": "images/47/1_s.jpg?v=b9438d96"}]}, {"no": "48", "name": "[유희] 유희 퍼 모자", "cat": "악세사리", "size": "F", "m1": "", "m2": "", "sw": "", "sl": "", "price": 25000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/48/1.jpg?v=552599a2", "s": "images/48/1_s.jpg?v=9b5ba346"}]}, {"no": "49", "name": "[피치댄] 그린 팬츠", "cat": "하의", "size": "S", "m1": "93.5", "m2": "32.5", "sw": "", "sl": "", "price": 40000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/49/1.jpg?v=4091b493", "s": "images/49/1_s.jpg?v=cb9aef30"}]}, {"no": "50", "name": "[보세] 탑", "cat": "상의", "size": "S", "m1": "35", "m2": "40", "sw": "", "sl": "", "price": 3000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/50/1.jpg?v=4e613841", "s": "images/50/1_s.jpg?v=92b72a18"}]}, {"no": "51", "name": "[애프터아워] 데님 탑", "cat": "상의", "size": "S", "m1": "32", "m2": "28", "sw": "", "sl": "", "price": 10000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/51/1.jpg?v=02ef5c31", "s": "images/51/1_s.jpg?v=90b66a7d"}]}, {"no": "52", "name": "[로라로라] 장원영 플라워 팬츠", "cat": "하의", "size": "S", "m1": "33", "m2": "100", "sw": "", "sl": "", "price": 30000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/52/1.jpg?v=bd3a838c", "s": "images/52/1_s.jpg?v=a62ede22"}]}, {"no": "53", "name": "[타브] 브라운 체크 (울100)", "cat": "상의", "size": "M", "m1": "40", "m2": "45", "sw": "", "sl": "", "price": 100000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/53/1.jpg?v=3a1e2298", "s": "images/53/1_s.jpg?v=e22fd5a5"}]}, {"no": "54", "name": "[틸아이다이] 그린 스트라이프", "cat": "상의", "size": "S", "m1": "47", "m2": "43", "sw": "", "sl": "", "price": 10000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/54/1.jpg?v=be877b81", "s": "images/54/1_s.jpg?v=f65aca07"}]}, {"no": "55", "name": "[플레어업] 화이트 팬츠", "cat": "하의", "size": "S", "m1": "35", "m2": "100", "sw": "", "sl": "", "price": 30000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/55/1.jpg?v=d5487996", "s": "images/55/1_s.jpg?v=c2d802ca"}]}, {"no": "56", "name": "[기준]파스텔 옐로우 후드", "cat": "상의", "size": "L", "m1": "60", "m2": "69", "sw": "", "sl": "", "price": 30000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/56/1.jpg?v=11546f71", "s": "images/56/1_s.jpg?v=8f3fe3dd"}]}, {"no": "57", "name": "[메이저] 털모자", "cat": "악세사리", "size": "F", "m1": "", "m2": "", "sw": "", "sl": "", "price": 20000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/57/1.jpg?v=46c4c751", "s": "images/57/1_s.jpg?v=ab87978d"}]}, {"no": "58", "name": "[보세] 털모자", "cat": "악세사리", "size": "F", "m1": "", "m2": "", "sw": "", "sl": "", "price": 3000, "cond": "상태 중", "sold": false, "link": "", "photos": [{"l": "images/58/1.jpg?v=6ba947fa", "s": "images/58/1_s.jpg?v=6e9c9343"}]}, {"no": "59", "name": "[자라] 꽃무늬 원피스", "cat": "원피스", "size": "S", "m1": "30.6", "m2": "73", "sw": "", "sl": "", "price": 3000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/59/1.jpg?v=a46224cf", "s": "images/59/1_s.jpg?v=bf300c43"}]}, {"no": "60", "name": "[토니웩] 블레이저", "cat": "아우터", "size": "S", "m1": "47.8", "m2": "73", "sw": "", "sl": "", "price": 50000, "cond": "상태 상", "sold": false, "link": "", "photos": [{"l": "images/60/1.jpg?v=4133f979", "s": "images/60/1_s.jpg?v=96c620f9"}]}]}</script>
+<script>
+(function(){
+var D=JSON.parse(document.getElementById('data').textContent);
+var CHAT=D.chat||'';
+var items=D.items;
+var CATS=['상의','아우터','셋업','원피스','하의','악세사리'];
+var CAT_EN={'all':'All','상의':'Tops','아우터':'Outerwear','셋업':'Sets','원피스':'Dresses','하의':'Bottoms','악세사리':'Accessories'};
+var LABELS={'상의':['가슴','총장'],'아우터':['가슴','총장'],'셋업':['가슴','총장'],'원피스':['허리','총장'],'하의':['허리','총장'],'악세사리':['가로','세로']};
+var state={cat:'all',hideSold:false};
+function pad(n){return n<10?'0'+n:''+n}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function num(v){return /^\d+(\.\d+)?$/.test(String(v||'').trim())?String(v).trim():''}
+function won(p){return p?'₩'+p.toLocaleString('ko-KR'):''}
+
+// status
+var sold=items.filter(function(i){return i.sold}).length;
+document.getElementById('sold').textContent='SOLD '+pad(sold);
+document.getElementById('left').textContent='LEFT '+pad(items.length-sold);
+document.getElementById('barfill').style.width=(items.length?Math.round(sold/items.length*100):0)+'%';
+document.getElementById('bar').setAttribute('aria-label','전체 '+items.length+'벌 중 '+sold+'벌 판매완료');
+
+var cta=document.getElementById('cta');
+if(CHAT){cta.href=CHAT}else{cta.classList.add('off');cta.removeAttribute('href');cta.querySelector('span').textContent='구매 문의 링크 준비 중'}
+
+function specHtml(it){
+  var L=LABELS[it.cat]||['치수1','치수2'];
+  var cells=['<div><span class="k">사이즈</span><span class="v">'+esc(it.size||'-')+'</span></div>'];
+  var a=num(it.m1),b=num(it.m2);
+  var rows='';
+  if(it.cat==='셋업'){
+    var sw=num(it.sw),sl=num(it.sl);
+    var top='<div class="spec">'+cells[0]+'<div><span class="k"><em>상의</em>가슴</span><span class="v">'+(a||'-')+'</span></div><div><span class="k"><em>상의</em>총장</span><span class="v">'+(b||'-')+'</span></div></div>';
+    if(sw||sl){top+='<div class="spec" style="border-top:0"><div></div><div><span class="k"><em>하의</em>허리</span><span class="v">'+(sw||'-')+'</span></div><div><span class="k"><em>하의</em>총장</span><span class="v">'+(sl||'-')+'</span></div></div>'}
+    return top;
+  }
+  if(a||b){cells.push('<div><span class="k">'+L[0]+'</span><span class="v">'+(a||'-')+'</span></div>','<div><span class="k">'+L[1]+'</span><span class="v">'+(b||'-')+'</span></div>')}
+  else{cells.push('<div></div>','<div></div>')}
+  return '<div class="spec">'+cells.join('')+'</div>';
+}
+
+function card(it,idx){
+  var n=it.photos.length;
+  var imgs=it.photos.map(function(p,k){
+    return '<button type="button" data-open="'+idx+'" data-k="'+k+'" aria-label="'+esc(it.name)+' 사진 '+(k+1)+' 크게 보기"><img data-src="'+p.s+'" alt="" decoding="async"></button>';
+  }).join('');
+  var dots=n>1?'<div class="dots">'+it.photos.map(function(_,k){return '<span'+(k===0?' class="on"':'')+'></span>'}).join('')+'</div>':'';
+  var arrows=n>1?'<button type="button" class="arr prev" aria-label="이전 사진"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><button type="button" class="arr next" aria-label="다음 사진"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>':'';
+  var price=it.price?'<span class="price">'+won(it.price)+'</span>':'<span class="price ask">가격 문의</span>';
+  var link=it.link?'<a class="more" href="'+esc(it.link)+'" target="_blank" rel="noopener noreferrer">상품 정보 보기 ↗</a>':'';
+  return '<article class="'+(it.sold?'is-sold':'')+'" data-idx="'+idx+'"><div class="media"><div class="track">'+imgs+'</div>'+(it.cond?'<span class="cond">'+esc(it.cond)+'</span>':'')+dots+(n>1?'<span class="cnt">1/'+n+'</span>':'')+arrows+(it.sold?'<div class="sold-veil"><span>판매완료</span></div>':'')+'</div>'+
+    '<div class="head"><div class="l"><span class="no">'+esc(it.no)+'</span><span class="name">'+esc(it.name)+'</span></div>'+price+'</div>'+specHtml(it)+link+'</article>';
+}
+
+function visible(){return items.filter(function(i){return (state.cat==='all'||i.cat===state.cat)&&!(state.hideSold&&i.sold)})}
+
+function renderTabs(){
+  var pool=items.filter(function(i){return !(state.hideSold&&i.sold)});
+  var defs=[['all',CAT_EN.all]].concat(CATS.filter(function(c){return items.some(function(i){return i.cat===c})}).map(function(c){return [c,CAT_EN[c]||c]}));
+  var h=defs.map(function(d){var c=d[0]==='all'?pool.length:pool.filter(function(i){return i.cat===d[0]}).length;return '<button type="button" class="tab" data-cat="'+d[0]+'" aria-pressed="'+(state.cat===d[0])+'">'+d[1]+'<sup>'+c+'</sup></button>'}).join('');
+  h+='<button type="button" class="hide-sold" id="hs" aria-pressed="'+state.hideSold+'"><span class="box"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>판매완료 제외</button>';
+  document.getElementById('tabs').innerHTML=h;
+}
+function renderGrid(){
+  var v=visible();
+  var g=document.getElementById('grid');
+  g.innerHTML=v.length?v.map(function(it){return card(it,items.indexOf(it))}).join(''):'<p class="empty">해당하는 상품이 없어요.</p>';
+  g.querySelectorAll('.track').forEach(bindTrack);
+  // load extra photos only for cards near the screen, and free them again when far away (keeps mobile memory low)
+  var lazy=g.querySelectorAll('article');
+  if(io){io.disconnect();lazy.forEach(function(a){io.observe(a)})}
+  else{g.querySelectorAll('img[data-src]').forEach(function(im){im.src=im.dataset.src})}
+}
+var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){
+  var t=e.target.querySelector('.track');if(e.isIntersecting&&t&&t._fix)t._fix();
+  if(e.isIntersecting){e.target._near=1;loadImgs(e.target,!e.target._all)}
+  else{e.target._near=0;e.target._all=0;e.target.querySelectorAll('img[src]').forEach(function(im){im.removeAttribute('src')})}
+  })},{rootMargin:'300px 0px'}):null;
+function loadImgs(art,coverOnly){art.querySelectorAll(coverOnly?'button[data-k="0"] img[data-src]':'img[data-src]').forEach(function(im){if(!im.getAttribute('src'))im.src=im.dataset.src})}
+function loadAll(art){if(art._all)return;art._all=1;loadImgs(art,false)}
+function render(){renderTabs();renderGrid()}
+
+function bindTrack(tr){
+  var art=tr.closest('article');var dots=art.querySelectorAll('.dots span');
+  var prev=art.querySelector('.arr.prev'),next=art.querySelector('.arr.next'),cnt=art.querySelector('.cnt');
+  var n=tr.children.length;
+  if(n<2)return;
+  // infinite loop: clone last slide before the first and first slide after the last
+  var head=tr.lastElementChild.cloneNode(true),tail=tr.firstElementChild.cloneNode(true);
+  head.setAttribute('aria-hidden','true');tail.setAttribute('aria-hidden','true');head.tabIndex=-1;tail.tabIndex=-1;
+  tr.insertBefore(head,tr.firstElementChild);tr.appendChild(tail);
+  function w(){return tr.clientWidth}
+  function pos(){return Math.round(tr.scrollLeft/w())}
+  function real(){return ((pos()-1)%n+n)%n}
+  function jump(i){tr._pt=Date.now();tr.style.scrollSnapType='none';tr.scrollLeft=i*w();tr.offsetWidth;tr.style.scrollSnapType=''}
+  jump(1);tr._fix=function(){if(tr.scrollLeft<1){jump(1);upd()}};
+  function upd(){var i=real();dots.forEach(function(d,k){d.classList.toggle('on',k===i)});if(cnt)cnt.textContent=(i+1)+'/'+n}
+  function settle(){var p=pos();if(p===0)jump(n);else if(p===n+1)jump(1);upd()}
+  var t;tr.addEventListener('scroll',function(){if(Date.now()-(tr._pt||0)>250)loadAll(art);clearTimeout(t);t=setTimeout(settle,120)},{passive:true});
+  function all(){loadAll(art)}
+  tr.addEventListener('touchstart',all,{passive:true});art.querySelector('.media').addEventListener('pointerenter',all);
+  function go(d){all();tr.scrollTo({left:(pos()+d)*w(),behavior:'smooth'})}
+  if(prev){prev.onclick=function(){go(-1)};next.onclick=function(){go(1)}}
+}
+
+document.getElementById('tabs').addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  if(b.id==='hs'){state.hideSold=!state.hideSold}else{state.cat=b.dataset.cat}
+  render();
+});
+
+// lightbox
+var lb=document.getElementById('lb'),lt=document.getElementById('lbTrack'),lbIt=null,lastFocus=null;
+function lbCur(){return Math.round(lt.scrollLeft/lt.clientWidth)}
+function lbUpd(){if(!lbIt)return;var i=lbCur(),n=lbIt.photos.length;document.getElementById('lbCount').textContent=pad(i+1)+' / '+pad(n);document.getElementById('lbPrev').disabled=i===0;document.getElementById('lbNext').disabled=i===n-1}
+function openLb(idx,k){
+  lbIt=items[idx];lastFocus=document.activeElement;
+  lt.innerHTML=lbIt.photos.map(function(p){return '<div><img src="'+p.l+'" alt="" loading="lazy" decoding="async"></div>'}).join('');
+  document.getElementById('lbName').textContent=lbIt.name;
+  lb.classList.add('open');document.body.style.overflow='hidden';
+  requestAnimationFrame(function(){lt.scrollLeft=k*lt.clientWidth;lbUpd()});
+  document.getElementById('lbClose').focus();
+}
+function closeLb(){lb.classList.remove('open');document.body.style.overflow='';lt.innerHTML='';lbIt=null;if(lastFocus)lastFocus.focus()}
+document.getElementById('grid').addEventListener('click',function(e){var b=e.target.closest('[data-open]');if(b)openLb(+b.dataset.open,+b.dataset.k)});
+document.getElementById('lbClose').onclick=closeLb;
+document.getElementById('lbPrev').onclick=function(){lt.scrollTo({left:(lbCur()-1)*lt.clientWidth,behavior:'smooth'})};
+document.getElementById('lbNext').onclick=function(){lt.scrollTo({left:(lbCur()+1)*lt.clientWidth,behavior:'smooth'})};
+var lto;lt.addEventListener('scroll',function(){clearTimeout(lto);lto=setTimeout(lbUpd,60)},{passive:true});
+lb.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')document.getElementById('lbPrev').click();if(e.key==='ArrowRight')document.getElementById('lbNext').click()});
+
+render();
+})();
+</script>
+</body>
+</html>
