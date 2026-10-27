@@ -156,7 +156,7 @@ function specHtml(it){
 function card(it,idx){
   var n=it.photos.length;
   var imgs=it.photos.map(function(p,k){
-    return '<button type="button" data-open="'+idx+'" data-k="'+k+'" aria-label="'+esc(it.name)+' 사진 '+(k+1)+' 크게 보기"><img src="'+p.s+'" srcset="'+p.s+' 540w, '+p.l+' 1080w" sizes="(max-width:767px) 100vw, 360px" alt="" loading="'+(idx<4&&k===0?'eager':'lazy')+'" decoding="async"></button>';
+    return '<button type="button" data-open="'+idx+'" data-k="'+k+'" aria-label="'+esc(it.name)+' 사진 '+(k+1)+' 크게 보기">'+(k===0?'<img src="'+p.s+'" alt="" loading="'+(idx<4?'eager':'lazy')+'" decoding="async">':'<img data-src="'+p.s+'" alt="" decoding="async">')+'</button>';
   }).join('');
   var dots=n>1?'<div class="dots">'+it.photos.map(function(_,k){return '<span'+(k===0?' class="on"':'')+'></span>'}).join('')+'</div>':'';
   var arrows=n>1?'<button type="button" class="arr prev" aria-label="이전 사진"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button><button type="button" class="arr next" aria-label="다음 사진"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>':'';
@@ -180,7 +180,15 @@ function renderGrid(){
   var g=document.getElementById('grid');
   g.innerHTML=v.length?v.map(function(it){return card(it,items.indexOf(it))}).join(''):'<p class="empty">해당하는 상품이 없어요.</p>';
   g.querySelectorAll('.track').forEach(bindTrack);
+  // load extra photos only for cards near the screen, and free them again when far away (keeps mobile memory low)
+  var lazy=g.querySelectorAll('article');
+  if(io){io.disconnect();lazy.forEach(function(a){io.observe(a)})}
+  else{g.querySelectorAll('img[data-src]').forEach(function(im){im.src=im.dataset.src})}
 }
+var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){
+  e.target.querySelectorAll('img[data-src]').forEach(function(im){
+    if(e.isIntersecting){if(!im.getAttribute('src'))im.src=im.dataset.src}else if(im.getAttribute('src')){im.removeAttribute('src')}
+  })})},{rootMargin:'900px 0px'}):null;
 function render(){renderTabs();renderGrid()}
 
 function bindTrack(tr){
